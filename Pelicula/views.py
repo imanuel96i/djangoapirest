@@ -3,7 +3,6 @@ from rest_framework import mixins, generics, permissions, viewsets
 from .serializers import PeliculaSerializer, GenreSerializer
 from .models import Pelicula, Genre
 
-
 # class UserViewSet(viewsets.ModelViewSet):
 #     """
 #     API endpoint that allows users to be viewed or edited.
