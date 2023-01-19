@@ -6,7 +6,7 @@ from rest_framework import routers
 
 admin.autodiscover()
 
-router = routers.DefaultRouter()
+router = routers.SimpleRouter()
 # router.register(r'users', views.UserViewSet)
 # router.register(r'groups', views.GroupViewSet)
 router.register(r'peliculas', views.PeliculaViewSet)
@@ -14,11 +14,11 @@ router.register(r'categorias', views.CategoryViewSet)
 
 
 
-urlpatterns = [
-    # path('', include(router.urls)),
-    path('peliculas/', views.PeliculaList.as_view()),
-    path('peliculas/<int:pk>', views.PeliculaDetail.as_view()),
-    path('categorias/', views.CategoryList.as_view()),
-    path('categorias/<int:pk>', views.CategoryDetail.as_view()),
-    path('v2/', include(router.urls))
-]
+# urlpatterns = [
+#     # path('', include(router.urls)),
+#     path('peliculas/', views.PeliculaList.as_view()),
+#     path('peliculas/<int:pk>', views.PeliculaDetail.as_view()),
+#     path('categorias/', views.CategoryList.as_view()),
+#     path('categorias/<int:pk>', views.CategoryDetail.as_view()),
+#     path('v2/', include(router.urls))
+# ]

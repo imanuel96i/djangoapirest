@@ -1,4 +1,3 @@
-from msilib.schema import ServiceInstall
 from django.shortcuts import render
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_str, force_str, smart_bytes, force_bytes, DjangoUnicodeDecodeError
@@ -18,6 +17,7 @@ import jwt
 from django.conf import settings
 
 class UserCreateAPIView(generics.GenericAPIView):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
     def post(self, request):
@@ -33,7 +33,7 @@ class UserCreateAPIView(generics.GenericAPIView):
 
         current_site = get_current_site(request).domain
         relativeLink = reverse('verify')
-        absurl = current_site+relativeLink+str(token)
+        absurl = current_site+relativeLink+'?token='+str(token)
         email_body = 'Hola ' + user.first_name + ' ' + user.last_name + '\n\n' + 'Para verificar tu cuenta, haz click en el siguiente enlace: \n' + absurl
         data={'email_body':email_body,
             'to_email':user.email,
@@ -42,6 +42,9 @@ class UserCreateAPIView(generics.GenericAPIView):
 
         return Response(user_data, status=status.HTTP_201_CREATED)
 
+    @classmethod
+    def get_extra_actions(cls):
+        return []
 class VerifyEmail(generics.GenericAPIView):
 
     def get(self, request):
